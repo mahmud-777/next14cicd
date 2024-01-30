@@ -7,8 +7,9 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint src --ext ts,tsx,js,jsx --report-unused-disable-directives --max-warnings 0",
-    "lint-fix": "eslint src --ext js, jsx,ts,tsx --fix",
-    "format": "prettier --write 'src/**/*.{js,jsx,ts,tsx,css,html}'"
+    "lint-fix": "eslint src --ext js,jsx,ts,tsx --fix",
+    "format": "prettier --write 'src/**/*.{js,jsx,ts,tsx,css,html}'",
+    "prepare": "husky"
   },
   "dependencies": {
     "next": "14.1.0",
@@ -30,5 +31,17 @@
     "prettier": "^3.2.4",
     "tailwindcss": "^3.3.0",
     "typescript": "^5"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged",
+      "pre-push": "npm run lint && npm run format"
+    }
+  },
+  "lint-staged": {
+    "src/**/*.{ts,tsx,js,jsx}": [
+      "npm run lint",
+      "npm run format"
+    ]
   }
 }
